@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Model;
 using System;
+using System.IO;
 using Relax;
 
 namespace Test
@@ -11,12 +12,13 @@ namespace Test
 		private Abastecimento ab = null;
 		private Config cf = null;
 		private ActiveRecord ar = null;
+		string dataBaseFile = "relax.db3";
 
 		[SetUp]
 		public void Init()
 		{
 			cf = Config.Instance;
-			cf.ConnectionString = "relaxe.db3";
+			cf.ConnectionString = dataBaseFile;
 			ar = new ActiveRecord();
 		}
 
@@ -31,7 +33,6 @@ namespace Test
 		{
 			ab.Horimetro = 73.32;
 			ab.IdEquipamento = 5;
-			ab.IdAbastecimento = 90;
 		}
 
 		[Test()]

@@ -21,6 +21,8 @@ namespace Relax
 			Table = new Table(this);
 		}
 
+		public int Id{ get; set; } 
+
 		public void StringFieldAdd (String name, int size)
 		{
 			Field f = new Field();
@@ -42,7 +44,7 @@ namespace Relax
 			Fields.Add(f);
 		}
 
-		public void RealFieldAdd (String name, int size)
+		public void RealFieldAdd (String name)
 		{
 			Field f = new Field();
 			f.Type = Field.FieldType.Real;

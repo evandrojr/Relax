@@ -8,12 +8,11 @@ namespace Model
 	{
 		public Abastecimento ()
 		{
-			PrimaryKey = "IdAbastecimento";
-			IntFieldAdd("Horimetro");
+			RealFieldAdd("Horimetro");
 			IntFieldAdd("IdEquipamento");
 		}
 
-		public int IdAbastecimento{ get; set; } 
+
 		public double Horimetro{ get; set; } 
 		public int IdEquipamento{ get; set; } 
 
