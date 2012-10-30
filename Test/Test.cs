@@ -13,10 +13,15 @@ namespace Test
 		private Config cf = null;
 		private ActiveRecord ar = null;
 		string dataBaseFile = "relax.db3";
+		bool runOnce = false;
 
 		[SetUp]
 		public void Init()
 		{
+			if(File.Exists(dataBaseFile) && !runOnce){
+				File.Delete(dataBaseFile);
+				runOnce = true;
+			}
 			cf = Config.Instance;
 			cf.ConnectionString = dataBaseFile;
 			ar = new ActiveRecord();
