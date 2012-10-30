@@ -10,18 +10,16 @@ namespace Relax
 		public string PrimaryKey;
 		public List<ActiveRecord> HasMany = new List<ActiveRecord>();
 		public List<Field> Fields = new List<Field>();
+		public Table Table;
+
 
 		public ActiveRecord ()
 		{
 			if(Config.Instance == null)
 				throw new Exception ("Null configuration for the ActiveRecord");
 			Config=Config.Instance;
+			Table = new Table(this);
 		}
-
-		public void FieldAdd(string field){
-			Fields.Add(field);
-		}
-
 
 		public void StringFieldAdd (String name, int size)
 		{
@@ -32,11 +30,14 @@ namespace Relax
 			Fields.Add(f);
 		}
 
+		public string CreateTable(){
+			return Table.Create();
+		}
 
-		public void IntFieldAdd (String name, int size)
+		public void IntFieldAdd (String name)
 		{
 			Field f = new Field();
-			f.Type = Field.FieldType.Int;
+			f.Type = Field.FieldType.Integer;
 			f.Name = name;
 			Fields.Add(f);
 		}
@@ -53,8 +54,8 @@ namespace Relax
 
 		}
 
-		public string EntityName(){
-			return this.GetType().Name;
+		public string Name{
+				get{return this.GetType().Name;}
 		}
 
 

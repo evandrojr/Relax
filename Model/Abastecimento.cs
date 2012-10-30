@@ -9,8 +9,8 @@ namespace Model
 		public Abastecimento ()
 		{
 			PrimaryKey = "IdAbastecimento";
-			FieldAdd("Horimetro");
-			FieldAdd("IdEquipamento");
+			IntFieldAdd("Horimetro");
+			IntFieldAdd("IdEquipamento");
 		}
 
 		public int IdAbastecimento{ get; set; } 

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Relax
 {
@@ -8,16 +10,22 @@ namespace Relax
 		public string Name;
 		public FieldType Type;
 		public int Size;
-		public bool MayBeNull;
+		public bool NotNull;
+
 
 		public enum FieldType{
-			Int,
+			Integer,
 			Real,
 			String,
 			Date,
 			Time,
 			Boolean,
 		}
+
+
+
+
+
 
 		public Field ()
 		{

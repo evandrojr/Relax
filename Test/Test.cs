@@ -11,15 +11,12 @@ namespace Test
 		private Abastecimento ab = null;
 		private Config cf = null;
 		private ActiveRecord ar = null;
-		public class Car { public int Color { get; set; } }
-		public class Person { public string Name { get; set; } }
-
 
 		[SetUp]
 		public void Init()
 		{
 			cf = Config.Instance;
-			cf.ConnectionString = "Data Source=banco.db,version=3";
+			cf.ConnectionString = "relaxe.db3";
 			ar = new ActiveRecord();
 		}
 
@@ -48,19 +45,23 @@ namespace Test
 		public void TestEntidadeAbastecimento()
 		{
 			Abastecimento ab =  new Abastecimento();
-			foreach (string s in ab.Fields)
-				Console.WriteLine(s);
+			foreach (Field f in ab.Fields)
+				Console.WriteLine(f.Name);
 		}
 
 
 		[Test()]
 		public void TestClassName()
 		{
-			Assert.AreEqual(ab.EntityName(), "Abastecimento");
-			Console.WriteLine(ab.EntityName());
+			Assert.AreEqual(ab.Name, "Abastecimento");
+			Console.WriteLine(ab.Name);
 		}
 
-
+		[Test()]
+		public void TestCreateTable()
+		{
+			Console.WriteLine(ab.CreateTable());
+		}
 
 
 
