@@ -52,7 +52,45 @@ namespace Relax
 			Fields.Add(f);
 		}
 
+		public void DateFieldAdd (String name)
+		{
+			Field f = new Field();
+			f.Type = Field.FieldType.Date;
+			f.Name = name;
+			Fields.Add(f);
+		}
+
+		public void TimeFieldAdd (String name)
+		{
+			Field f = new Field();
+			f.Type = Field.FieldType.Time;
+			f.Name = name;
+			Fields.Add(f);
+		}
+
+
 		public void GetAll(){
+
+		}
+
+		public void Save ()
+		{
+			string fields = "Insert into " + Name + " (" + Environment.NewLine;
+			string values = "(";
+			foreach (Field f in Fields) {
+				fields += f.Name + ", ";
+				values += "'" + GetPropValue(this, f.Name) + "', ";
+			}
+			fields = fields.Substring(0, fields.Length - 2);
+			fields +=")";
+			values = values.Substring(0, values.Length - 2);
+			values +=")";
+			fields+= " values " + values;
+
+			Console.Out.WriteLine(fields);
+
+			Db.ExecuteNonQuery(fields);
+			//return s;
 
 		}
 
@@ -61,7 +99,19 @@ namespace Relax
 		}
 
 
+		public static object GetPropValue( object src, string propName )
+		{
 
+			Type t = src.GetType( ).GetProperty( propName ).GetValue( src, null ).GetType();
+			//if(Object.ReferenceEquals (src.GetType(), val.GetType() )) {
+			if(t.Equals(typeof(System.DateTime) )) {
+				DateTime val= new DateTime();
+			    val = (DateTime) src.GetType( ).GetProperty( propName ).GetValue( src, null );
+				return val.Year.ToString().PadLeft(4,'0') + "-" + val.Month.ToString().PadLeft(2,'0') + "-" + val.Day.ToString().PadLeft(2,'0') + " " + val.Hour.ToString().PadLeft(2,'0') + ":" + val.Minute.ToString().PadLeft(2,'0') + ":" + val.Second.ToString().PadLeft(2,'0');
+			}
+			else
+				return Convert.ToString(src.GetType( ).GetProperty( propName ).GetValue( src, null ), Config.Instance.CuEnUk) ;
+		}
 
 	}
 }

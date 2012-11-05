@@ -8,7 +8,10 @@ namespace Relax
 	{
 		private static volatile Config instance;
 		private static object syncRoot = new Object();
-		
+		public string ConnectionString = null;
+		public System.Globalization.CultureInfo CuEnUk = new System.Globalization.CultureInfo("en-GB");
+
+
 		private Config() {}
 		
 		public static Config Instance
@@ -29,7 +32,6 @@ namespace Relax
 		}
 
 
-		public string ConnectionString = null;
 
 
 	}

@@ -5,15 +5,6 @@ namespace Relax
 	public class Table
 	{
 
-//		CREATE TABLE [teste] (
-//			[a] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
-//			[b] REAL  NULL,
-//			[c] BOOLEAN  NULL,
-//			[d] DATE  NULL,
-//			[e] VARCHAR(9)  NULL,
-//			[f] DATE  NULL
-//			)
-
 		public ActiveRecord Entity;
 		public string Name{get{return Entity.Name;}}
 
@@ -36,6 +27,9 @@ namespace Relax
 			Db.ExecuteNonQuery(s);
 			return s;
 		}
+
+
+
 	}
 }
 

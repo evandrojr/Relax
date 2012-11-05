@@ -25,6 +25,8 @@ namespace Test
 			cf = Config.Instance;
 			cf.ConnectionString = dataBaseFile;
 			ar = new ActiveRecord();
+			ab = new Abastecimento();
+			FillVars();
 		}
 
 		[Test()]
@@ -33,12 +35,23 @@ namespace Test
 			ab = new Abastecimento();
 		}
 
-		[Test()]
-		public void TestFillVars ()
+
+		public void FillVars ()
 		{
 			ab.Horimetro = 73.32;
-			ab.IdEquipamento = 5;
+			ab.Equipamento = 5;
+			ab.Operador = 9;
+			ab.Objeto = 9494;
+			ab.Tanque = 5;
+			ab.Funcionario = 704;
+			ab.TipoDerivador = 2;
+			ab.Quantidade = 435.53;
+			ab.Data = DateTime.Now;
+			ab.Hora = "10:43:52";
 		}
+
+
+
 
 		[Test()]
 		public void TestSingleton ()
@@ -70,7 +83,13 @@ namespace Test
 		}
 
 
-
+		[Test()]
+		public void TestSave ()
+		{
+			ab.Save();
+			//Assert.AreEqual(ab.Config.ConnectionString, cf.ConnectionString);
+			//Console.WriteLine(ab.Config.ConnectionString);
+		}
 
 	}
 }
