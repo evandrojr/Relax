@@ -20,17 +20,18 @@ namespace Model
 			TimeFieldAdd("Hora");
 		}
 
+
 		public int Objeto{ get; set; } 
 		public int Tanque{ get; set; } 
-		public int Funcionario{ get; set; } 
-		public int Operador{ get; set; } 
+		public int? Funcionario{ get; set; } 
+		public int? Operador{ get; set; } 
 		public int Equipamento{ get; set; } 
 
 		public double Horimetro{ get; set; } 
 		public int TipoDerivador{ get; set; } 
-		public double Quantidade{ get; set; } 
+		public double? Quantidade{ get; set; } 
 
-		public DateTime Data{ get; set; } 
+		public DateTime? Data{ get; set; } 
 		public string Hora{ get; set; } 
 
 

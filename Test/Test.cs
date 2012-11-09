@@ -20,13 +20,15 @@ namespace Test
 		{
 			if(File.Exists(dataBaseFile) && !runOnce){
 				File.Delete(dataBaseFile);
-				runOnce = true;
+
 			}
 			cf = Config.Instance;
 			cf.ConnectionString = dataBaseFile;
 			ar = new ActiveRecord();
 			ab = new Abastecimento();
-			FillVars();
+
+
+			runOnce = true;
 		}
 
 		[Test()]
@@ -47,6 +49,21 @@ namespace Test
 			ab.TipoDerivador = 2;
 			ab.Quantidade = 435.53;
 			ab.Data = DateTime.Now;
+			ab.Hora = "10:43:52";
+		}
+
+
+		public void FillWithNulls ()
+		{
+			ab.Horimetro = 73.32;
+			ab.Equipamento = 5;
+			//ab.Operador = 9;
+			ab.Objeto = 9494;
+			ab.Tanque = 5;
+			//ab.Funcionario = 704;
+			ab.TipoDerivador = 2;
+			ab.Quantidade = 435.53;
+			//ab.Data = DateTime.Now;
 			ab.Hora = "10:43:52";
 		}
 
@@ -86,10 +103,20 @@ namespace Test
 		[Test()]
 		public void TestSave ()
 		{
+			FillVars();
 			ab.Save();
-			//Assert.AreEqual(ab.Config.ConnectionString, cf.ConnectionString);
-			//Console.WriteLine(ab.Config.ConnectionString);
+
 		}
+
+
+		[Test()]
+		public void TestSaveWithNulls ()
+		{
+			FillWithNulls();
+			ab.Save();
+		}
+
+
 
 	}
 }

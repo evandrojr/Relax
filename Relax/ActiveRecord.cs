@@ -77,21 +77,22 @@ namespace Relax
 		{
 			string fields = "Insert into " + Name + " (" + Environment.NewLine;
 			string values = "(";
+			object value;
 			foreach (Field f in Fields) {
 				fields += f.Name + ", ";
-				values += "'" + GetPropValue(this, f.Name) + "', ";
+				value = GetPropValue(this, f.Name);
+				if(value != null)
+					values += "'" + GetPropValue(this, f.Name) + "', ";
+				else
+					values += "NULL, ";
 			}
 			fields = fields.Substring(0, fields.Length - 2);
 			fields +=")";
 			values = values.Substring(0, values.Length - 2);
 			values +=")";
 			fields+= " values " + values;
-
 			Console.Out.WriteLine(fields);
-
 			Db.ExecuteNonQuery(fields);
-			//return s;
-
 		}
 
 		public string Name{
@@ -101,11 +102,11 @@ namespace Relax
 
 		public static object GetPropValue( object src, string propName )
 		{
-
+			if(src.GetType( ).GetProperty( propName ).GetValue( src, null ) == null)
+				return null;
 			Type t = src.GetType( ).GetProperty( propName ).GetValue( src, null ).GetType();
-			//if(Object.ReferenceEquals (src.GetType(), val.GetType() )) {
 			if(t.Equals(typeof(System.DateTime) )) {
-				DateTime val= new DateTime();
+				DateTime val;
 			    val = (DateTime) src.GetType( ).GetProperty( propName ).GetValue( src, null );
 				return val.Year.ToString().PadLeft(4,'0') + "-" + val.Month.ToString().PadLeft(2,'0') + "-" + val.Day.ToString().PadLeft(2,'0') + " " + val.Hour.ToString().PadLeft(2,'0') + ":" + val.Minute.ToString().PadLeft(2,'0') + ":" + val.Second.ToString().PadLeft(2,'0');
 			}
